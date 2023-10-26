@@ -8,21 +8,32 @@ public class RacingCar {
     private int position;
     private final MoveCondition moveCondition;
 
-    public RacingCar(String name, MoveCondition moveCondition) {
+    public RacingCar(String name, int position, MoveCondition moveCondition) {
         if (name.length() <= 5) {
             this.moveCondition = moveCondition;
             this.name = name;
-            this.position = 0;
+            this.position = position;
             return;
         }
         throw new IllegalArgumentException(CAR_NAME_LENGTH_OVER_FIVE_EXCEPTION);
     }
 
-    public int race(int randomNumber) {
+    public RacingCar(String name, MoveCondition moveCondition) {
+        this(name, 0, moveCondition);
+    }
+
+    public void race(int randomNumber) {
         boolean canGoOneStepForward = moveCondition.checkNumber(randomNumber);
         if (canGoOneStepForward) {
             this.position++;
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPosition() {
         return position;
     }
 

@@ -49,10 +49,10 @@ public class RacingCarTest {
         int randomNumber = randomNumberGenerator.createRandomNumber(0, 9);
 
         // when
-        int result = racingCar.race(randomNumber);
+        racingCar.race(randomNumber);
 
         // then
-        assertThat(result).isEqualTo(1);
+        assertThat(racingCar).isEqualTo(new RacingCar("tobi", 1, moveCondition));
     }
 
     @ParameterizedTest
@@ -66,9 +66,9 @@ public class RacingCarTest {
         int randomNumber = randomNumberGenerator.createRandomNumber(0, 9);
 
         // when
-        int result = racingCar.race(randomNumber);
+        racingCar.race(randomNumber);
 
         // then
-        assertThat(result).isEqualTo(0);
+        assertThat(racingCar).isEqualTo(new RacingCar("tobi", moveCondition));
     }
 }
