@@ -8,6 +8,8 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import racingcar.service.DoubleConsoleService;
 
 public class InputViewTest {
@@ -38,11 +40,12 @@ public class InputViewTest {
         Assertions.assertThat(numberOfAttempts).isEqualTo(12);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("시도할 횟수에는 숫자만 입력할 수 있습니다.")
-    void inputErrorWithNumberOfAttempts(){
+    @ValueSource(strings = {"1@", "2d424", "가나"})
+    void inputErrorWithNumberOfAttempts(String given) {
         // given
-        InputView inputView = new InputView(new DoubleConsoleService("12@"));
+        InputView inputView = new InputView(new DoubleConsoleService(given));
 
         // when // then
         assertThatThrownBy(inputView::inputNumberOfAttempts)
