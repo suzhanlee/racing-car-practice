@@ -26,6 +26,6 @@
     * [x] : 최종 우승자를 출력한다.
 
 * `RacingCarGameController` 
-    * [] : RacingCarGame를 제어
-    * [] : view에게 적절한 메시지를 보낸다.
+    * [x] : RacingCarGame를 제어
+    * [x] : view에게 적절한 메시지를 보낸다.
     * [] : 시도한 횟수가 0 이면 모두 우승자가 된다.
