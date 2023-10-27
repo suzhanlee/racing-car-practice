@@ -23,4 +23,8 @@ public class GameStartRs {
     public int getPosition() {
         return position;
     }
+
+    public boolean isFinishLine(int max) {
+        return this.position == max;
+    }
 }
