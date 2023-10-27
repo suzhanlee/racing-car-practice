@@ -43,6 +43,7 @@ public class RacingGameController {
                 nextRequest.getRacingCarDtos().add(racingCarDto);
             }
             gameResult = racingGame.startGame(nextRequest);
+            outputView.printExecutionResult(gameResult);
         } while (numberOfAttempts-- > 0);
 
         outputView.printWinners(gameResult);
