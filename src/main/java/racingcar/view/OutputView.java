@@ -18,7 +18,7 @@ public class OutputView {
         StringBuilder executionResultStorage = new StringBuilder();
         rs.forEach(dto -> {
             executionResultStorage.append(dto.getCarName()).append(" : ");
-            executionResultStorage.append("-".repeat(Math.max(0, dto.getPosition())));
+            executionResultStorage.append("-".repeat(Math.max(0, dto.getPosition()))).append('\n');
         });
         System.out.println(executionResultStorage);
     }
