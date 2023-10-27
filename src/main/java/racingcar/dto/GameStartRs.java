@@ -15,4 +15,12 @@ public class GameStartRs {
         rs.position = racingCar.getPosition();
         return rs;
     }
+
+    public String getCarName() {
+        return carName;
+    }
+
+    public int getPosition() {
+        return position;
+    }
 }
