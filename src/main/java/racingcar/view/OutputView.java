@@ -1,5 +1,6 @@
 package racingcar.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 import racingcar.dto.GameStartRs;
@@ -22,7 +23,20 @@ public class OutputView {
         System.out.println(executionResultStorage);
     }
 
-    public void printWinners(List<String> winnerNames) {
+    public void printWinners(List<GameStartRs> rs) {
+        int max = 0;
+        for (GameStartRs result : rs) {
+            max = Math.max(result.getPosition(), max);
+        }
+
+        List<String> winnerNames = new ArrayList<>();
+
+        for (GameStartRs result : rs) {
+            if (result.getPosition() == max) {
+                winnerNames.add(result.getCarName());
+            }
+        }
+
         StringBuilder winnerNameStorage = new StringBuilder();
         IntStream.range(0, winnerNames.size()).forEachOrdered(winnerIndex -> {
             String winnerName = winnerNames.get(winnerIndex);
