@@ -29,3 +29,7 @@
     * [x] : RacingCarGame를 제어
     * [x] : view에게 적절한 메시지를 보낸다.
     * [] : 시도한 횟수가 0 이면 모두 우승자가 된다.
+
+* `Application`
+    * [x] : 레이싱 카 경주를 시작한다.
+    * [x] : ConsoleService와 RandomService의 기본 구현체 추가
