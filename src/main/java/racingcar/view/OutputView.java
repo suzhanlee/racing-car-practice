@@ -1,7 +1,7 @@
 package racingcar.view;
 
 import java.util.List;
-import racingcar.dto.GameStartRs;
+import racingcar.dto.RacingCarDto;
 
 public class OutputView {
 
@@ -12,50 +12,51 @@ public class OutputView {
         System.out.println(EXECUTION_RESULT_MENT);
     }
 
-    public void printExecutionResult(List<GameStartRs> rs) {
+    public void printExecutionResult(List<RacingCarDto> executionResult) {
         StringBuilder executionResultStorage = new StringBuilder();
-        rs.forEach(dto -> {
+        executionResult.forEach(dto -> {
             executionResultStorage.append(dto.getCarName()).append(" : ");
             executionResultStorage.append("-".repeat(Math.max(0, dto.getPosition()))).append('\n');
         });
         System.out.println(executionResultStorage);
     }
 
-    public void printWinners(List<GameStartRs> gameResults) {
-        int max = findFinishLine(gameResults);
+    public void printWinners(List<RacingCarDto> racingCarDtos) {
+        int max = findFinishLine(racingCarDtos);
 
         StringBuilder winnerNameStorage = new StringBuilder();
-        storeWinnerInStorage(gameResults, winnerNameStorage);
 
-        if (existsJointWinner(gameResults)) {
-            storeJointWinnerInStorage(gameResults, winnerNameStorage, max);
+        List<String> winnerNames = racingCarDtos.stream().filter(racingCarDto -> racingCarDto.getPosition() == max)
+                .map(RacingCarDto::getCarName).toList();
+
+        storeWinnerInStorage(winnerNames.get(0), winnerNameStorage);
+
+        if (existsJointWinner(winnerNames)) {
+            storeJointWinnerInStorage(winnerNames, winnerNameStorage);
         }
 
         System.out.println(WINNER_NAMES + winnerNameStorage);
     }
 
-    private int findFinishLine(List<GameStartRs> gameResults) {
+    private int findFinishLine(List<RacingCarDto> racingCarDtos) {
         int max = 0;
-        for (GameStartRs gameResult : gameResults) {
-            max = Math.max(gameResult.getPosition(), max);
+        for (RacingCarDto racingCarDto : racingCarDtos) {
+            max = Math.max(racingCarDto.getPosition(), max);
         }
         return max;
     }
 
-    private boolean existsJointWinner(List<GameStartRs> gameResults) {
-        return gameResults.size() >= 2;
+    private boolean existsJointWinner(List<String> winnerNames) {
+        return winnerNames.size() >= 2;
     }
 
-    private void storeWinnerInStorage(List<GameStartRs> gameResults, StringBuilder winnerNameStorage) {
-        winnerNameStorage.append(gameResults.get(0).getCarName());
+    private void storeWinnerInStorage(String winnerName, StringBuilder winnerNameStorage) {
+        winnerNameStorage.append(winnerName);
     }
 
-    private void storeJointWinnerInStorage(List<GameStartRs> gameResults, StringBuilder winnerNameStorage, int max) {
-        for (int i = 1; i < gameResults.size(); i++) {
-            String winnerName = gameResults.get(i).getCarName();
-            if (gameResults.get(i).isFinishLine(max)) {
-                winnerNameStorage.append(", ").append(winnerName);
-            }
+    private void storeJointWinnerInStorage(List<String> winnerNames, StringBuilder winnerNameStorage) {
+        for (int winnerIndex = 1; winnerIndex < winnerNames.size(); winnerIndex++) {
+            winnerNameStorage.append(", ").append(winnerNames.get(winnerIndex));
         }
     }
 }
