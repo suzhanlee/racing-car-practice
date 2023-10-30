@@ -45,8 +45,8 @@ public class RacingCarTest {
         // given
         MoveCondition moveCondition = new MoveCondition();
         RacingCar racingCar = new RacingCar("tobi", moveCondition);
-        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator(new DoubleRandomService(given));
-        int randomNumber = randomNumberGenerator.createRandomNumber(0, 9);
+        RandomNumberFactory randomNumberFactory = new RandomNumberFactory(new DoubleRandomService(given));
+        int randomNumber = randomNumberFactory.createRandomNumber(0, 9);
 
         // when
         racingCar.race(randomNumber);
@@ -62,8 +62,8 @@ public class RacingCarTest {
         // given
         MoveCondition moveCondition = new MoveCondition();
         RacingCar racingCar = new RacingCar("tobi", moveCondition);
-        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator(new DoubleRandomService(given));
-        int randomNumber = randomNumberGenerator.createRandomNumber(0, 9);
+        RandomNumberFactory randomNumberFactory = new RandomNumberFactory(new DoubleRandomService(given));
+        int randomNumber = randomNumberFactory.createRandomNumber(0, 9);
 
         // when
         racingCar.race(randomNumber);

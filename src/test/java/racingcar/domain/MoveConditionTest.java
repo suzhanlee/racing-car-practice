@@ -16,7 +16,7 @@ public class MoveConditionTest {
         MoveCondition condition = new MoveCondition();
 
         // when
-        boolean result = condition.checkNumber(given);
+        boolean result = condition.check(given);
 
         // then
         assertThat(result).isEqualTo(true);
@@ -30,7 +30,7 @@ public class MoveConditionTest {
         MoveCondition condition = new MoveCondition();
 
         // when
-        boolean result = condition.checkNumber(given);
+        boolean result = condition.check(given);
 
         // then
         assertThat(result).isEqualTo(false);

@@ -21,7 +21,7 @@ public class InputViewTest {
         InputView inputView = new InputView(new DoubleConsoleService("tobi,ship,chan"));
 
         // when
-        List<String> carNames = inputView.inputCarNames();
+        List<String> carNames = inputView.carNames();
 
         // then
         assertThat(carNames).isEqualTo(List.of("tobi", "ship", "chan"));
@@ -34,7 +34,7 @@ public class InputViewTest {
         InputView inputView = new InputView(new DoubleConsoleService("12"));
 
         // when
-        long numberOfAttempts = inputView.inputNumberOfAttempts();
+        long numberOfAttempts = inputView.numberOfAttempts();
 
         // then
         Assertions.assertThat(numberOfAttempts).isEqualTo(12);
@@ -48,7 +48,7 @@ public class InputViewTest {
         InputView inputView = new InputView(new DoubleConsoleService(given));
 
         // when // then
-        assertThatThrownBy(inputView::inputNumberOfAttempts)
+        assertThatThrownBy(inputView::numberOfAttempts)
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(NUMBER_OF_ATTEMPTS_ONLY_ALLOW_NUMBER_EXCEPTION);
     }

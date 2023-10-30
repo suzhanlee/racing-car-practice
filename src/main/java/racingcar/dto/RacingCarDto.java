@@ -1,5 +1,6 @@
 package racingcar.dto;
 
+import racingcar.domain.MoveCondition;
 import racingcar.domain.RacingCar;
 
 public class RacingCarDto {
@@ -12,9 +13,8 @@ public class RacingCarDto {
         this.position = position;
     }
 
-
     public static RacingCarDto createRacingCarDto(RacingCar racingCar) {
-        return new RacingCarDto(racingCar.getName(), racingCar.getPosition());
+        return new RacingCarDto(racingCar.name(), racingCar.position());
     }
 
     public String getCarName() {
@@ -23,5 +23,9 @@ public class RacingCarDto {
 
     public int getPosition() {
         return position;
+    }
+
+    public RacingCar toRacingCar() {
+        return new RacingCar(this.carName, this.position, new MoveCondition());
     }
 }

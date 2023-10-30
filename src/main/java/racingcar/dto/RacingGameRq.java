@@ -1,6 +1,7 @@
 package racingcar.dto;
 
 import java.util.List;
+import racingcar.domain.RacingCar;
 
 public class RacingGameRq {
 
@@ -22,5 +23,10 @@ public class RacingGameRq {
 
     public long getLeftNumberOfAttempts() {
         return leftNumberOfAttempts;
+    }
+
+    public List<RacingCar> toRacingCars() {
+        return getRacingCarDtoList().stream()
+                .map(RacingCarDto::toRacingCar).toList();
     }
 }

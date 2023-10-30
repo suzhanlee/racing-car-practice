@@ -13,5 +13,6 @@ public class DoubleConsoleService implements ConsoleService {
     }
 
     @Override
-    public void close() {}
+    public void close() {
+    }
 }

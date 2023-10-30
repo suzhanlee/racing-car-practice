@@ -23,17 +23,20 @@ public class RacingCar {
     }
 
     public void race(int randomNumber) {
-        boolean canGoOneStepForward = moveCondition.checkNumber(randomNumber);
-        if (canGoOneStepForward) {
+        if (movable(randomNumber)) {
             this.position++;
         }
     }
 
-    public String getName() {
+    private boolean movable(int randomNumber) {
+        return moveCondition.check(randomNumber);
+    }
+
+    public String name() {
         return name;
     }
 
-    public int getPosition() {
+    public int position() {
         return position;
     }
 

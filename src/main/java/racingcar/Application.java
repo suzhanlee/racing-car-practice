@@ -1,43 +1,37 @@
 package racingcar;
 
 import java.util.List;
+import racingcar.config.ObjectFactory;
 import racingcar.controller.RacingGameController;
-import racingcar.domain.RacingGame;
-import racingcar.domain.RandomNumberGenerator;
 import racingcar.dto.RacingCarDto;
 import racingcar.dto.RacingGameRq;
 import racingcar.dto.RacingGameRs;
-import racingcar.service.DefaultConsoleService;
-import racingcar.service.DefaultRandomService;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        InputView inputView = new InputView(new DefaultConsoleService());
-        OutputView outputView = new OutputView();
-        RacingGameController controller = new RacingGameController(
-                new RacingGame(new RandomNumberGenerator(new DefaultRandomService())));
+        ObjectFactory objectFactory = new ObjectFactory();
+        InputView inputView = objectFactory.inputView();
+        OutputView outputView = objectFactory.outPutView();
+        RacingGameController controller = objectFactory.controller();
 
-        List<String> carNames = inputView.inputCarNames();
-        long numberOfAttempts = inputView.inputNumberOfAttempts();
+        List<String> carNames = inputView.carNames();
+        long numberOfAttempts = inputView.numberOfAttempts();
 
         RacingGameRq racingGameRq = createGameRequest(carNames, numberOfAttempts);
         outputView.printExecutionResultMent();
 
-        racingGameRq = createWinnerDto(controller, racingGameRq, outputView, numberOfAttempts);
-        outputView.printWinners(racingGameRq.getRacingCarDtoList());
-    }
-
-    private static RacingGameRq createWinnerDto(RacingGameController controller, RacingGameRq racingGameRq,
-                                                OutputView outputView, long numberOfAttempts) {
-        do {
+        // 여기서 do while 문 안의 OutputView 는 한번에 view를 출력해 밖으로 뺄 수 있다.
+        // 그러면, do-while문을 메소드 추출할 수 있어져 의미가 명확해짐!
+        while (numberOfAttempts-- > 0) {
             RacingGameRs racingGameRs = controller.startGame(racingGameRq);
-            outputView.printExecutionResult(racingGameRq.getRacingCarDtoList());
+            outputView.printExecutionResult(racingGameRs.getRacingCarDtoList());
             racingGameRq = createNextGameRequest(racingGameRs);
-        } while (numberOfAttempts-- > 0);
-        return racingGameRq;
+        }
+
+        outputView.printWinners(racingGameRq.getRacingCarDtoList());
     }
 
     private static RacingGameRq createGameRequest(List<String> carNames, long numberOfAttempts) {

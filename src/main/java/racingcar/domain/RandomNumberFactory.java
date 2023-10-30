@@ -2,11 +2,11 @@ package racingcar.domain;
 
 import racingcar.service.RandomService;
 
-public class RandomNumberGenerator {
+public class RandomNumberFactory {
 
     private final RandomService randomService;
 
-    public RandomNumberGenerator(RandomService randomService) {
+    public RandomNumberFactory(RandomService randomService) {
         this.randomService = randomService;
     }
 
